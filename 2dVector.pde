@@ -14,29 +14,35 @@ void setup()
 
   
 }
-void draw(){
-  
-    x=px;
-    y=-py;
+void draw()
+{
+  translate(350,350);
+    x = px;
+    y = -py;
      
-  
+  //Enter the vector field as the argument of PVector constructor
   location = new  PVector(-y,x);
-  centre = new PVector(width/2,height/2);
+  centre = new PVector(0,0);
   stroke(255);
   strokeWeight(3);
-  translate(width/2+x,height/2+y);
-  //translate(x,y);
+  translate(x, y);
+
   displac=location.sub(centre);
   displac.normalize();
   displac=displac.mult(10);
   
   line(0,0,displac.x,displac.y);
-  if(py<600){
-  if(px<600)
-  px+=30;
-  else{
-  py=py+30;
-  px=-300;}
+  if(py<600)
+  {
+    if(px < 600)
+    px += 30;
+    else
+    {
+      py=py+30;
+      px=-300;
+    }
   }
   translate(-x,-y);
+  
+  
 }
