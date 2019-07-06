@@ -1,0 +1,65 @@
+PVector displac1,displac2,location,centre1,centre2,E1,E2,E ,E_d;
+float px=-300,py=-300,x,y,c=200,d=200;
+float Q=5,r1,r2;
+
+void setup()
+{ 
+  size(700,700);
+  background(0);
+  frameRate(300);
+
+  
+  textSize(30);
+  fill(210);
+
+  
+}
+void draw()
+{ stroke(c,100,d);
+  translate(350,350);
+    x = px;
+    y = -py;
+     
+  //Enter the vector field as the argument of PVector constructor
+  location = new  PVector(x,y);
+  centre1 = new PVector(-175,0);
+  centre2 = new PVector(175,0);
+  E=new PVector(0,0);
+  strokeWeight(1.5);
+  fill(200,0,0);
+  ellipse(-175,0,10,10);
+  fill(0,0,250);
+  ellipse(175,0,10,10);
+  translate(x, y);
+
+  displac1=location.sub(centre1);
+  displac2=location.sub(centre2);
+  
+  r1=displac1.mag();
+  r2=displac2.mag();
+  E1=displac1.mult(9*pow(10,9)*Q/(pow(r1,3)));
+  E2=displac2.mult(9*pow(10,9)*Q/(pow(r2,3)));
+  E=E1.add(E2);
+  E_d=E.normalize();
+  E_d=E.mult(10);
+  
+  line(0,0,E_d.x,E_d.y);
+  stroke(0,25,0);
+  fill(0,225,0);
+  ellipse(E_d.x,E_d.y,5,5);
+  if(py<300)
+  {
+    if(px < 300){
+    px += 30;
+    d=d+10;}
+    else{
+      py=py+30;
+      px=-300;
+      c=c+10;
+      d=200;
+    }
+  }
+  translate(-x,-y);
+  
+  
+}
